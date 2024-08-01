@@ -19,7 +19,7 @@ class StudentListView extends StatelessWidget {
                 color: Colors.grey, borderRadius: BorderRadius.circular(8)),
             child: ListTile(
                 onTap: () =>
-                    Navigator.pushNamed(context, RouteGenerator.classRoomPage),
+                    Navigator.pushNamed(context, RouteGenerator.studentDetailsPage,arguments: studentList[index]),
                 title: Text(
                   studentList[index].name,
                   style: const TextStyle(

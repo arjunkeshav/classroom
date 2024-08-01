@@ -1,3 +1,4 @@
+import 'package:classroom/src/students/presentation/pages/student_details_page.dart';
 import 'package:flutter/material.dart';
 
 import '../../src/home/home.dart';
@@ -10,6 +11,7 @@ class RouteGenerator {
   static const splashScreen = '/';
   static const homePage = '/home';
   static const studentListPage = '/student';
+  static const studentDetailsPage = '/student_details';
   static const subjectPage = '/subject';
   static const classRoomPage = '/class_room';
 
@@ -22,6 +24,9 @@ class RouteGenerator {
         return animatedRoute(const HomePage());
       case studentListPage:
         return animatedRoute(const StudentListPage());
+      case studentDetailsPage:
+        final StudentEntity studentEntity = settings.arguments as StudentEntity;
+        return animatedRoute( StudentDetailsPage(studentEntity: studentEntity));
       case subjectPage:
         return animatedRoute(const HomePage());
       case classRoomPage:

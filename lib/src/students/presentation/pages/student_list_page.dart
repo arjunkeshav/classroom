@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../utils/common/common.dart';
 
-
 class StudentListPage extends StatelessWidget {
   const StudentListPage({super.key});
 
@@ -23,7 +22,7 @@ class StudentListPage extends StatelessWidget {
             const Padding(
               padding: EdgeInsets.all(16.0),
               child: Text(
-                'Students',
+                StudentConst.studentTitle,
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
               ),
             ),
@@ -34,10 +33,12 @@ class StudentListPage extends StatelessWidget {
                     return const Center(child: CircularProgressIndicator());
                   } else if (state is StudentLoadedState) {
                     return StudentListView(studentList: state.studentList);
-                  }  else if (state is StudentErrorState) {
-                    return RefreshWidget(onPressed: ()=>context.read<StudentBloc>().add(FetchStudentListEvent()));
-                  }
-                  else {
+                  } else if (state is StudentErrorState) {
+                    return RefreshWidget(
+                        onPressed: () => context
+                            .read<StudentBloc>()
+                            .add(FetchStudentListEvent()));
+                  } else {
                     return const SizedBox();
                   }
                 },

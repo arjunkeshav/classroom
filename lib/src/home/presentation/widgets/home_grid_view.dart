@@ -8,15 +8,17 @@ class HomeGridView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      shrinkWrap: true, // Allows the GridView to take only the space it needs
+      shrinkWrap: true,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2, // Number of columns
-          crossAxisSpacing: 8.0, // Horizontal space between items
-          mainAxisSpacing: 16.0,childAspectRatio: .8/1 // Vertical space between items
+          crossAxisCount: 2,
+          crossAxisSpacing: 8.0,
+          mainAxisSpacing: 16.0,childAspectRatio: .8/1
       ),
       itemCount: HomeConst.categoryList.length,
       itemBuilder: (context, index) {
-        return SizedBox(
+        return InkWell(
+          onTap: () => Navigator.pushNamed(
+              context, HomeConst.categoryList[index].navigateTo),
           child: Container(
             decoration: BoxDecoration(
               color: HomeConst.categoryList[index].cardBg,

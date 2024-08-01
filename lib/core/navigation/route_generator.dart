@@ -2,22 +2,30 @@ import 'package:flutter/material.dart';
 
 import '../../src/home/home.dart';
 import '../../src/splash/splash.dart';
-
+import '../../src/students/students.dart';
 
 class RouteGenerator {
   RouteGenerator._();
 
   static const splashScreen = '/';
-  static const homeScreen = '/home';
+  static const homePage = '/home';
+  static const studentListPage = '/student';
+  static const subjectPage = '/subject';
+  static const classRoomPage = '/class_room';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case splashScreen:
         return MaterialPageRoute(builder: (_) => const SplashScreen());
 
-      case homeScreen:
+      case homePage:
         return animatedRoute(const HomePage());
-
+      case studentListPage:
+        return animatedRoute(const StudentListPage());
+      case subjectPage:
+        return animatedRoute(const HomePage());
+      case classRoomPage:
+        return animatedRoute(const HomePage());
 
       default:
         return _errorRoute();
@@ -32,8 +40,8 @@ class RouteGenerator {
         const end = Offset.zero;
         const curve = Curves.easeIn;
 
-        var tween = Tween(begin: begin, end: end).chain(
-            CurveTween(curve: curve));
+        var tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
 
         return SlideTransition(
           position: animation.drive(tween),
@@ -55,11 +63,7 @@ class RouteGenerator {
           backgroundColor: Colors.transparent,
         ),
         body: const Center(
-          child: SizedBox(
-              height: 200,
-              width: 250,
-              child: Text('Wrong Screen')
-          ),
+          child: SizedBox(height: 200, width: 250, child: Text('Wrong Screen')),
         ),
       );
     });

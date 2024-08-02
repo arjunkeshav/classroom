@@ -1,0 +1,1 @@
+export 'classrooms_model.dart';

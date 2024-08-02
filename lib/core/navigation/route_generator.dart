@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../src/classroom/classroom.dart';
 import '../../src/home/home.dart';
 import '../../src/splash/splash.dart';
 import '../../src/students/students.dart';
@@ -15,7 +16,7 @@ class RouteGenerator {
   static const studentDetailsPage = '/student_details';
   static const subjectListPage = '/subject';
   static const detailsPage = '/details_page';
-  static const classRoomPage = '/class_room';
+  static const classRoomListPage = '/class_room';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -33,8 +34,8 @@ class RouteGenerator {
         return animatedRoute(DetailsPageWidget(
           details: detailsPageParam,
         ));
-      case classRoomPage:
-        return animatedRoute(const HomePage());
+      case classRoomListPage:
+        return animatedRoute(const ClassroomListPage());
 
       default:
         return _errorRoute();

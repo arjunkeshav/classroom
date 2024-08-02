@@ -17,7 +17,7 @@ class ApiClient {
     _baseOptions = BaseOptions(
         baseUrl: UrlConst.baseUrl,
         connectTimeout: const Duration(milliseconds: 30000),
-        receiveTimeout: const Duration(milliseconds: 1000000),
+        receiveTimeout: const Duration(milliseconds: 100000),
         followRedirects: true,
         headers: {
           HttpHeaders.contentTypeHeader: 'application/json',
@@ -41,6 +41,7 @@ class ApiClient {
 
     dio.interceptors.add(InterceptorsWrapper(
       onRequest: (reqOptions, handler) {
+        reqOptions.queryParameters.addAll({'api_key': 'CbedB'});
         return handler.next(reqOptions);
       },
       onError: (DioException dioError, handler) {
@@ -48,9 +49,4 @@ class ApiClient {
       },
     ));
   }
-
-// /// Company id fetch screen
-// Future<Response> login(String username,String password,String fcmToken) {
-//   return dio.get(Urls.login);
-// }
 }

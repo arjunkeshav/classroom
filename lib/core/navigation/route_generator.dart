@@ -1,9 +1,10 @@
-import 'package:classroom/src/students/presentation/pages/student_details_page.dart';
 import 'package:flutter/material.dart';
 
 import '../../src/home/home.dart';
 import '../../src/splash/splash.dart';
 import '../../src/students/students.dart';
+import '../../src/subjects/subjects.dart';
+import '../../utils/common/common.dart';
 
 class RouteGenerator {
   RouteGenerator._();
@@ -12,7 +13,8 @@ class RouteGenerator {
   static const homePage = '/home';
   static const studentListPage = '/student';
   static const studentDetailsPage = '/student_details';
-  static const subjectPage = '/subject';
+  static const subjectListPage = '/subject';
+  static const detailsPage = '/details_page';
   static const classRoomPage = '/class_room';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -24,11 +26,13 @@ class RouteGenerator {
         return animatedRoute(const HomePage());
       case studentListPage:
         return animatedRoute(const StudentListPage());
-      case studentDetailsPage:
-        final StudentEntity studentEntity = settings.arguments as StudentEntity;
-        return animatedRoute( StudentDetailsPage(studentEntity: studentEntity));
-      case subjectPage:
-        return animatedRoute(const HomePage());
+      case subjectListPage:
+        return animatedRoute(const SubjectListPage());
+      case detailsPage:
+        final DetailsPageParam detailsPageParam = settings.arguments as DetailsPageParam;
+        return animatedRoute(DetailsPageWidget(
+          details: detailsPageParam,
+        ));
       case classRoomPage:
         return animatedRoute(const HomePage());
 

@@ -1,12 +1,9 @@
-import 'package:classroom/core/core.dart';
 import 'package:flutter/material.dart';
 
-import '../../students.dart';
+class DetailsPageWidget extends StatelessWidget {
+  final DetailsPageParam details;
 
-class StudentDetailsPage extends StatelessWidget {
-  final StudentEntity studentEntity;
-
-  const StudentDetailsPage({required this.studentEntity, super.key});
+  const DetailsPageWidget({required this.details, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,44 +16,60 @@ class StudentDetailsPage extends StatelessWidget {
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const Row(
+           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                StudentConst.studentDetailsTitle,
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
+                details.title,
+                style:const TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
               ),
             ],
           ),
           const SizedBox(
             height: 137,
           ),
-          const CircleAvatar(
+           CircleAvatar(
             radius: 60,
             backgroundImage: NetworkImage(
-              StudentConst.studentAvatarUrl,
+              details.avatarUrl,
             ),
           ),
           const SizedBox(
             height: 20,
           ),
           Text(
-            studentEntity.name,
+            details.firstText,
             style: const TextStyle(fontSize: 22),
           ),
           const SizedBox(
             height: 10,
           ),
           Text(
-            'Age : ${studentEntity.age}',
+            details.secondText,
             style: const TextStyle(fontSize: 22),
           ),
           const SizedBox(
             height: 10,
           ),
-          Text(studentEntity.email, style: const TextStyle(fontSize: 17)),
+          Text(details.thirdText, style: const TextStyle(fontSize: 17)),
         ],
       ),
     );
   }
+}
+
+class DetailsPageParam {
+  final String firstText;
+  final String secondText;
+  final String thirdText;
+  final String avatarUrl;
+  final String title;
+
+  const DetailsPageParam({
+    required this.avatarUrl,
+    required this.firstText,
+    required this.secondText,
+    required this.thirdText,
+    required this.title,
+  });
 }

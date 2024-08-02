@@ -1,30 +1,30 @@
 import 'dart:convert';
 
-import 'package:classroom/src/students/students.dart';
 import 'package:dio/dio.dart';
 
 import '../../../../../core/core.dart';
+import '../../../subjects.dart';
 
-class StudentRemoteDataSourceImpl extends StudentRemoteDataSource {
+class SubjectsRemoteDataSourceImpl extends SubjectsRemoteDataSource {
   @override
-  Future<DataState> fetchStudentList() async {
+  Future<DataState> fetchSubjectList() async {
     try {
       final response = await ApiClient()
           .dio
-          .get(UrlConst.studentListUrl);
+          .get(UrlConst.subjectListUrl);
       if (response.statusCode == 200) {
         return DataState.success(
-            studentsModelFromJson(jsonEncode(response.data)));
+            subjectsModelFromJson(jsonEncode(response.data)));
       } else {
         return DataState.error(DioException(
           requestOptions: response.requestOptions,
-          error: 'Failed to load students',
+          error: 'Failed to load subjects',
         ));
       }
     } catch (e) {
       return DataState.error(DioException(
         requestOptions: RequestOptions(path: ''),
-        error: 'Failed to load students',
+        error: 'Failed to load subjects',
       ));
     }
   }

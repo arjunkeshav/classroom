@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/core.dart';
-import '../../../../utils/common/common.dart';
 import '../../classroom.dart';
 
 class ClassroomListItem extends StatelessWidget {

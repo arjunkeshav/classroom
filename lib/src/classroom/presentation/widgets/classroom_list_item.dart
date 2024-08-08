@@ -15,14 +15,7 @@ class ClassroomListItem extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.grey, borderRadius: BorderRadius.circular(8)),
       child: ListTile(
-        onTap: () => Navigator.pushNamed(context, RouteGenerator.detailsPage,
-            // arguments: DetailsPageParam(
-            //   title: SubjectConst.subjectDetailsTitle,
-            //   firstText: classroomEntity.name,
-            //   secondText: subjectEntity.teacher,
-            //   thirdText: 'credit : ${subjectEntity.credits}',
-            //   avatarUrl: SubjectConst.subjectImageUrl,
-            // )
+        onTap: () => Navigator.pushNamed(context, RouteGenerator.classRoomDetailsPage,arguments:ClassroomDetailsParam(classroomId:classroomEntity.id.toString())
         ),
         title: Text(
           classroomEntity.name,
@@ -46,9 +39,10 @@ class ClassroomListItem extends StatelessWidget {
                     ),
                   ),
                   const TextSpan(
-                      text: 'Seats', style: TextStyle(fontSize: 13))
+                      text: ClassroomConst.seats, style: TextStyle(fontSize: 13))
                 ])),
       ),
     );
   }
 }
+

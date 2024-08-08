@@ -1,3 +1,4 @@
+import 'package:classroom/src/classroom/classroom.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/core.dart';
@@ -6,8 +7,9 @@ import '../../subjects.dart';
 
 class SubjectListItem extends StatelessWidget {
   final SubjectEntity subjectEntity;
+  final SubjectListParam subjectListParam;
 
-  const SubjectListItem({required this.subjectEntity, super.key});
+  const SubjectListItem({required this.subjectEntity, required this.subjectListParam, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,14 +18,14 @@ class SubjectListItem extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.grey, borderRadius: BorderRadius.circular(8)),
       child: ListTile(
-        onTap: () => Navigator.pushNamed(context, RouteGenerator.detailsPage,
+        onTap: () =>subjectListParam.fromHome? Navigator.pushNamed(context, RouteGenerator.detailsPage,
             arguments: DetailsPageParam(
               title: SubjectConst.subjectDetailsTitle,
               firstText: subjectEntity.name,
               secondText: subjectEntity.teacher,
               thirdText: 'credit : ${subjectEntity.credits}',
               avatarUrl: SubjectConst.subjectImageUrl,
-            )),
+            )):Navigator.pushReplacementNamed(context,RouteGenerator.classRoomDetailsPage,arguments:ClassroomDetailsParam(subjectId:subjectEntity.id.toString(),classroomId: subjectListParam.classroomId! )),
         title: Text(
           subjectEntity.name,
           style: const TextStyle(

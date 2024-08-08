@@ -17,6 +17,8 @@ class RouteGenerator {
   static const subjectListPage = '/subject';
   static const detailsPage = '/details_page';
   static const classRoomListPage = '/class_room';
+  static const classRoomDetailsPage = '/class_room_details';
+  static const registrationPage = '/registration';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -28,7 +30,9 @@ class RouteGenerator {
       case studentListPage:
         return animatedRoute(const StudentListPage());
       case subjectListPage:
-        return animatedRoute(const SubjectListPage());
+        var value = settings.arguments;
+        final SubjectListParam subjectListParam = value!=null?value as SubjectListParam:SubjectListParam();
+        return animatedRoute(SubjectListPage(subjectListParam:subjectListParam));
       case detailsPage:
         final DetailsPageParam detailsPageParam = settings.arguments as DetailsPageParam;
         return animatedRoute(DetailsPageWidget(
@@ -36,6 +40,11 @@ class RouteGenerator {
         ));
       case classRoomListPage:
         return animatedRoute(const ClassroomListPage());
+      case classRoomDetailsPage:
+        final ClassroomDetailsParam classroomDetailsParam = settings.arguments as ClassroomDetailsParam;
+        return animatedRoute(ClassroomDetailsPage(classroomDetailsParam: classroomDetailsParam));
+      case registrationPage:
+        return _comingSoonRoute();
 
       default:
         return _errorRoute();
@@ -67,13 +76,26 @@ class RouteGenerator {
         appBar: AppBar(
           automaticallyImplyLeading: true,
           iconTheme: const IconThemeData(color: Colors.black38),
-          foregroundColor: Colors.white,
-          title: const Text(""),
           elevation: 0,
-          backgroundColor: Colors.transparent,
+          backgroundColor: Colors.white,
         ),
         body: const Center(
-          child: SizedBox(height: 200, width: 250, child: Text('Wrong Screen')),
+          child: Text('Wrong Screen'),
+        ),
+      );
+    });
+  }
+  static Route<dynamic> _comingSoonRoute() {
+    return MaterialPageRoute(builder: (_) {
+      return Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: true,
+          iconTheme: const IconThemeData(color: Colors.black38),
+          elevation: 0,
+          backgroundColor: Colors.white,
+        ),
+        body: const Center(
+          child: Text('Coming Soon'),
         ),
       );
     });

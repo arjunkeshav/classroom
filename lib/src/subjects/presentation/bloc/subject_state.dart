@@ -20,6 +20,12 @@ final class SubjectLoadedState extends SubjectState {
   @override
   List<Object> get props => [subjectList];
 }
+final class SubjectDetailsLoadedState extends SubjectState {
+  final SubjectEntity subjectEntity;
+  const SubjectDetailsLoadedState({required this.subjectEntity});
+  @override
+  List<Object> get props => [subjectEntity];
+}
 
 final class SubjectErrorState extends SubjectState {
   @override

@@ -20,6 +20,12 @@ final class ClassroomLoadedState extends ClassroomState {
   @override
   List<Object> get props => [classroomList];
 }
+final class ClassroomDetailsLoadedState extends ClassroomState {
+  final ClassroomEntity classroomEntity;
+  const ClassroomDetailsLoadedState({required this.classroomEntity});
+  @override
+  List<Object> get props => [classroomEntity];
+}
 
 final class ClassroomErrorState extends ClassroomState {
   @override

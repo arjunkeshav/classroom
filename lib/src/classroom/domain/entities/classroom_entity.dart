@@ -1,3 +1,9 @@
+import 'dart:convert';
+
+ClassroomEntity classroomEntityFromJson(String str) => ClassroomEntity.fromJson(json.decode(str));
+
+String classroomEntityToJson(ClassroomEntity data) => json.encode(data.toJson());
+
 class ClassroomEntity {
   final int id;
   final String layout;

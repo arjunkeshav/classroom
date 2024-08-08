@@ -10,4 +10,9 @@ class SubjectsRepositoryImpl implements SubjectsRepository {
   Future<DataState> fetchSubjectList() async {
     return await subjectsRemoteDataSourceImpl.fetchSubjectList();
   }
+
+  @override
+  Future<DataState> fetchSubjectDetails(param) async {
+    return await subjectsRemoteDataSourceImpl.fetchSubjectDetails(param);
+  }
 }

@@ -1,3 +1,4 @@
+import 'package:classroom/src/classroom/domain/use_case/add_subject_to_classroom_use_case.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../src/students/students.dart';
@@ -28,14 +29,22 @@ Future<void> initializeDependencies() async {
       FetchStudentListUseCase(studentRepositoryImpl: sl()));
   sl.registerSingleton<FetchSubjectListUseCase>(
       FetchSubjectListUseCase(subjectsRepositoryImpl: sl()));
+  sl.registerSingleton<FetchSubjectDetailsUseCase>(
+      FetchSubjectDetailsUseCase(subjectsRepositoryImpl: sl()));
   sl.registerSingleton<FetchClassroomListUseCase>(
       FetchClassroomListUseCase(classroomRepositoryImpl: sl()));
+  sl.registerSingleton<FetchClassroomDetailsUseCase>(
+      FetchClassroomDetailsUseCase(classroomRepositoryImpl: sl()));
+  sl.registerSingleton<AddSubjectToClassroomUseCase>(
+      AddSubjectToClassroomUseCase(classroomRepositoryImpl: sl()));
 
   //bloc
   sl.registerFactory<StudentBloc>(
       () => StudentBloc(fetchStudentListUseCase: sl()));
-  sl.registerFactory<SubjectBloc>(
-      () => SubjectBloc(fetchSubjectListUseCase: sl()));
-  sl.registerFactory<ClassroomBloc>(
-      () => ClassroomBloc(fetchClassroomListUseCase: sl()));
+  sl.registerFactory<SubjectBloc>(() => SubjectBloc(
+      fetchSubjectListUseCase: sl(), fetchSubjectDetailsUseCase: sl()));
+  sl.registerFactory<ClassroomBloc>(() => ClassroomBloc(
+      fetchClassroomListUseCase: sl(),
+      fetchClassroomDetailsUseCase: sl(),
+      addSubjectToClassroomUseCase: sl()));
 }

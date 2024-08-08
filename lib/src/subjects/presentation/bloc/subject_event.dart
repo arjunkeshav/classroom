@@ -9,3 +9,11 @@ class FetchSubjectListEvent extends SubjectEvent{
   List<Object?> get props => [];
 
 }
+class FetchSubjectDetailsEvent extends SubjectEvent{
+  final String subjectId;
+
+  const FetchSubjectDetailsEvent({required this.subjectId});
+  @override
+  List<Object?> get props => [subjectId];
+
+}

@@ -3,10 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/core.dart';
 import '../../../../utils/common/common.dart';
+import '../../../classroom/classroom.dart';
 import '../../subjects.dart';
 
 class SubjectListPage extends StatelessWidget {
-  const SubjectListPage({super.key});
+  final SubjectListParam subjectListParam;
+
+  const SubjectListPage({required this.subjectListParam, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +18,15 @@ class SubjectListPage extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () => subjectListParam.fromHome
+                ? Navigator.pop(context)
+                : Navigator.pushReplacementNamed(
+                    context, RouteGenerator.classRoomDetailsPage,
+                    arguments: ClassroomDetailsParam(
+                        classroomId: subjectListParam.classroomId!)),
+          ),
           backgroundColor: Colors.white,
         ),
         body: Column(
@@ -32,7 +44,9 @@ class SubjectListPage extends StatelessWidget {
                   if (state is SubjectLoadingState) {
                     return const Center(child: CircularProgressIndicator());
                   } else if (state is SubjectLoadedState) {
-                    return SubjectListView(subjectList: state.subjectList);
+                    return SubjectListView(
+                        subjectList: state.subjectList,
+                        subjectListParam: subjectListParam);
                   } else if (state is SubjectErrorState) {
                     return RefreshWidget(
                         onPressed: () => context
@@ -49,4 +63,11 @@ class SubjectListPage extends StatelessWidget {
       ),
     );
   }
+}
+
+class SubjectListParam {
+  final bool fromHome;
+  final String? classroomId;
+
+  SubjectListParam({this.fromHome = true, this.classroomId});
 }

@@ -28,4 +28,26 @@ class SubjectsRemoteDataSourceImpl extends SubjectsRemoteDataSource {
       ));
     }
   }
+  @override
+  Future<DataState> fetchSubjectDetails(param) async {
+    try {
+      final response = await ApiClient()
+          .dio
+          .get('${UrlConst.subjectListUrl}/$param');
+      if (response.statusCode == 200) {
+        return DataState.success(
+            subjectEntityFromJson(jsonEncode(response.data)));
+      } else {
+        return DataState.error(DioException(
+          requestOptions: response.requestOptions,
+          error: 'Failed to load subjects',
+        ));
+      }
+    } catch (e) {
+      return DataState.error(DioException(
+        requestOptions: RequestOptions(path: ''),
+        error: 'Failed to load subjects',
+      ));
+    }
+  }
 }
